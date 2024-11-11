@@ -1,58 +1,66 @@
 #include <iostream>
 #include <string>
 using namespace std;
+
 int main()
 {
-    string names[10];     // using array to store student names maximum 10
-    float grades[10];     // using array to store student grades
-    int studentCount = 0; // to know how many students have been added
+    string names[10];     // Array to store student names, maximum 10
+    float grades[10];     // Array to store student grades
+    int studentCount = 0; // To keep track of added students
     int choice;
 
     cout << "\t\tSTUDENT GRADE MANAGEMENT SYSTEM\n";
 
     do
-    { // using do while loop for looping this code:
+    {
         cout << "\n--- Simple Student Grade System ---\n";
         cout << "1. Add a new student\n";
         cout << "2. Display all students' details\n";
         cout << "3. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
+
+        if (cin.fail())
+        { // Check if a non-integer was entered for choice
+            cout << "Invalid input. Please enter a number.\n";
+            cin.clear();            // Clear the error flag on cin
+            cin.ignore(1000, '\n'); // Ignore invalid input
+            continue;
+        }
+
         switch (choice)
-        { // using switch to handle choice
+        {
         case 1:
         {
             if (studentCount < 10)
             {
-                // Add a new student
                 cout << "Enter student name: ";
-                cin >> names[studentCount]; // if studentCount is 1, it will store the name in names[1] (the first student)
+                cin >> names[studentCount];
 
                 cout << "Enter student grade (0-100): ";
-                cin >> grades[studentCount]; // same as name[studentCount]
+                cin >> grades[studentCount];
 
-                // check if the grade is lesser than 100 or not
+                if (cin.fail())
+                { // Check if a non-integer was entered for grade
+                    cout << "Invalid input. Please enter a number for the grade.\n";
+                    cin.clear();            // Clear the error flag on cin
+                    cin.ignore(1000, '\n'); // Ignore invalid input
+                    continue;
+                }
+
                 if (grades[studentCount] < 0 || grades[studentCount] > 100)
-                { // using || for OR
+                {
                     cout << "Invalid grade. Please enter a grade between 0 and 100.\n";
                     grades[studentCount] = 0; // Reset invalid grade
                 }
-
-                studentCount++; // Increase the student count after adding a new student
+                else
+                {
+                    studentCount++; // Increase the student count after valid input
+                }
             }
             else
             {
                 cout << "Maximum number of students reached.\n";
-            }
-            if (cin.fail())
-            { // check to if user inout an character word instead of integer then show error
-                cout << "Please Enter a Integer Number";
-                cin.clear();            // Clear the error flag on cin
-                cin.ignore(1000, '\n'); // Ignore invalid input
-            }
-            else
-            {
-                cout << "Invalid Input choose between 1 and 3 Please try again.\n";
             }
             break;
         }
@@ -65,10 +73,9 @@ int main()
             }
             else
             {
-                // display all student details
                 cout << "\n--- All Students Details ---\n";
                 for (int i = 0; i < studentCount; i++)
-                { // using for loop for printing 1 to 10 student data
+                {
                     cout << "Student " << i + 1 << ":\n";
                     cout << "Name: " << names[i] << endl;
                     cout << "Grade: " << grades[i] << endl;
@@ -94,16 +101,7 @@ int main()
 
         default:
         {
-            if (cin.fail())
-            { // check to if user inout an character word instead of integer then show error
-                cout << "Please Enter a Integer Number";
-                cin.clear();            // Clear the error flag on cin
-                cin.ignore(1000, '\n'); // Ignore invalid input
-            }
-            else
-            {
-                cout << "Invalid Input choose between 1 and 3 Please try again.\n";
-            }
+            cout << "Invalid input. Please choose a number between 1 and 3.\n";
             break;
         }
         }

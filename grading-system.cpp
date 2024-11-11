@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
 int main()
 {
     string names[10];     // using array to store student names maximum 10
@@ -15,11 +14,10 @@ int main()
     { // using do while loop for looping this code:
         cout << "\n--- Simple Student Grade System ---\n";
         cout << "1. Add a new student\n";
-        cout << "2. Display all students details\n";
+        cout << "2. Display all students' details\n";
         cout << "3. Exit\n";
         cout << "Enter your choice: ";
         cin >> choice;
-
         switch (choice)
         { // using switch to handle choice
         case 1:
@@ -45,6 +43,16 @@ int main()
             else
             {
                 cout << "Maximum number of students reached.\n";
+            }
+            if (cin.fail())
+            { // check to if user inout an character word instead of integer then show error
+                cout << "Please Enter a Integer Number";
+                cin.clear();            // Clear the error flag on cin
+                cin.ignore(1000, '\n'); // Ignore invalid input
+            }
+            else
+            {
+                cout << "Invalid Input choose between 1 and 3 Please try again.\n";
             }
             break;
         }
@@ -80,13 +88,22 @@ int main()
 
         case 3:
         {
-            cout << "\nExiting the system. Thank you for using the Student Grade Management System!\n"; // 3 for exit
+            cout << "\nExiting the system. Thank you for using the Student Grade Management System!\n";
             break;
         }
 
         default:
         {
-            cout << "Invalid Input. Please try again.\n"; // error handling
+            if (cin.fail())
+            { // check to if user inout an character word instead of integer then show error
+                cout << "Please Enter a Integer Number";
+                cin.clear();            // Clear the error flag on cin
+                cin.ignore(1000, '\n'); // Ignore invalid input
+            }
+            else
+            {
+                cout << "Invalid Input choose between 1 and 3 Please try again.\n";
+            }
             break;
         }
         }
